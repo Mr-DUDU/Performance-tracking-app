@@ -5,115 +5,62 @@ from syncademic.models.aspecto import Aspecto, Docente
 def run():
     # Obtener el docente Ana Marciana o crear uno si no existe
     docente, created = Docente.objects.get_or_create(
-        id_docente=3
+        id_docente=3,
+        nombre="Carlos"
     )
 
     if not created:
-        print(f"El docente {docente_ana.nombre} ya existe. Actualizando aspectos...")
+        print(f"El docente {docente.nombre} ya existe. Actualizando aspectos...")
 
-    # Subaspectos para Docencia - Estado CRÍTICO
-    subaspectos_docencia_ana = [
+    # Borrar todos los aspectos existentes de este docente
+    Aspecto.objects.filter(docente=docente).delete()
+
+    # Subaspectos para Docencia - Estado CRÍTICO (Progreso bajo, tiempo muy avanzado)
+    subaspectos_docencia = [
         {'nombre': 'Registro_clase', 'progreso': 10},
         {'nombre': 'Tutoría', 'progreso': 20},
         {'nombre': 'Planificación', 'progreso': 30}
     ]
 
     # Crear el aspecto de Docencia
-    Aspecto.objects.create(
+    aspecto_docencia = Aspecto.objects.create(
         nombre="Docencia",
         fecha_inicio=datetime(2024, 6, 1),
-        fecha_fin=datetime(2024, 8, 7),
-        subaspectos=subaspectos_docencia_ana,
-        docente=docente_ana
+        fecha_fin=datetime(2024, 8, 7),  # Fecha de fin justo antes de la fecha actual
+        subaspectos=subaspectos_docencia,
+        docente=docente
     )
 
-    # Subaspectos para Gestión - Estado INTENSO
-    subaspectos_gestion_ana = [
+    # Subaspectos para Gestión - Estado INTENSO (Tiempo avanzado, progreso medio-bajo)
+    subaspectos_gestion = [
         {'nombre': 'Administración', 'progreso': 10},
         {'nombre': 'Comité', 'progreso': 15},
         {'nombre': 'Capacitación', 'progreso': 5}
     ]
 
     # Crear el aspecto de Gestión
-    Aspecto.objects.create(
+    aspecto_gestion = Aspecto.objects.create(
         nombre="Gestión",
         fecha_inicio=datetime(2024, 6, 1),
         fecha_fin=datetime(2024, 9, 10),
-        subaspectos=subaspectos_gestion_ana,
-        docente=docente_ana
+        subaspectos=subaspectos_gestion,
+        docente=docente
     )
 
-    # Subaspectos para Investigación - Estado BAJO (Inactivo)
-    subaspectos_investigacion_ana = [
+    # Subaspectos para Investigación - Estado BAJO (Inactivo, fecha futura)
+    subaspectos_investigacion = [
         {'nombre': 'TIC', 'progreso': 0},
         {'nombre': 'Conferencias', 'progreso': 0},
         {'nombre': 'Publicaciones', 'progreso': 0}
     ]
 
     # Crear el aspecto de Investigación
-    Aspecto.objects.create(
+    aspecto_investigacion = Aspecto.objects.create(
         nombre="Investigación",
-        fecha_inicio=datetime(2024, 9, 30),
+        fecha_inicio=datetime(2024, 9, 30),  # Fecha de inicio futura
         fecha_fin=datetime(2024, 12, 1),
-        subaspectos=subaspectos_investigacion_ana,
-        docente=docente_ana
-    )
-
-    # Docente Fedelobo
-    docente_fedelobo, created = Docente.objects.get_or_create(
-        id_docente=1,
-        defaults={'nombre': 'Fedelobo', 'correo': 'profesor_a@example.com', 'estado': 'activo'}
-    )
-
-    if not created:
-        print(f"El docente {docente_fedelobo.nombre} ya existe. Actualizando aspectos...")
-
-    # Subaspectos para Docencia - Estado NORMAL
-    subaspectos_docencia_fedelobo = [
-        {'nombre': 'Registro_clase', 'progreso': 60},
-        {'nombre': 'Tutoría', 'progreso': 60},
-        {'nombre': 'Planificación', 'progreso': 60}
-    ]
-
-    # Crear el aspecto de Docencia
-    Aspecto.objects.create(
-        nombre="Docencia",
-        fecha_inicio=datetime(2024, 6, 1),
-        fecha_fin=datetime(2024, 9, 1),
-        subaspectos=subaspectos_docencia_fedelobo,
-        docente=docente_fedelobo
-    )
-
-    # Subaspectos para Gestión - Estado INTENSO
-    subaspectos_gestion_fedelobo = [
-        {'nombre': 'Administración', 'progreso': 10},
-        {'nombre': 'Comité', 'progreso': 15},
-        {'nombre': 'Capacitación', 'progreso': 5}
-    ]
-
-    # Crear el aspecto de Gestión
-    Aspecto.objects.create(
-        nombre="Gestión",
-        fecha_inicio=datetime(2024, 6, 1),
-        fecha_fin=datetime(2024, 9, 10),
-        subaspectos=subaspectos_gestion_fedelobo,
-        docente=docente_fedelobo
-    )
-
-    # Subaspectos para Investigación - Estado BAJO
-    subaspectos_investigacion_fedelobo = [
-        {'nombre': 'TIC', 'progreso': 0},
-        {'nombre': 'Conferencias', 'progreso': 0},
-        {'nombre': 'Publicaciones', 'progreso': 0}
-    ]
-
-    # Crear el aspecto de Investigación
-    Aspecto.objects.create(
-        nombre="Investigación",
-        fecha_inicio=datetime(2024, 6, 1),
-        fecha_fin=datetime(2024, 12, 1),
-        subaspectos=subaspectos_investigacion_fedelobo,
-        docente=docente_fedelobo
+        subaspectos=subaspectos_investigacion,
+        docente=docente
     )
 
     print("Datos de prueba creados o actualizados con éxito.")

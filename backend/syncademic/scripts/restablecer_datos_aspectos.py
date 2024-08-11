@@ -1,18 +1,19 @@
 from datetime import datetime
 from syncademic.models.aspecto import Aspecto, Docente
 
-
 def run():
-    # Obtener el docente Ana Marciana o crear uno si no existe
-    docente, created = Docente.objects.get_or_create(
-        id_docente=3,
+    # Eliminar todos los docentes existentes
+    Docente.objects.all().delete()
+
+    # Crear un nuevo docente
+    docente = Docente.objects.create(
+        id_docente=1,
         nombre="Carlos"
     )
 
-    if not created:
-        print(f"El docente {docente.nombre} ya existe. Actualizando aspectos...")
+    print(f"Docente {docente.nombre} creado.")
 
-    # Borrar todos los aspectos existentes de este docente
+    # Borrar todos los aspectos existentes de este docente (aunque no debería ser necesario ya que es un nuevo docente)
     Aspecto.objects.filter(docente=docente).delete()
 
     # Subaspectos para Docencia - Estado CRÍTICO (Progreso bajo, tiempo muy avanzado)
@@ -63,4 +64,4 @@ def run():
         docente=docente
     )
 
-    print("Datos de prueba creados o actualizados con éxito.")
+    print("Docente creado y datos de prueba actualizados con éxito.")

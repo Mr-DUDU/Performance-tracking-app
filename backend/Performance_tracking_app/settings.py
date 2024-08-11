@@ -29,7 +29,6 @@ DEBUG = True
 ALLOWED_HOSTS = ['syncademic-0-1.onrender.com', '0.0.0.0', '127.0.0.1']
 
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -42,8 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'behave_django',
+    'channels',  # Añadido para Django Channels
     'django_extensions',
-    'corsheaders'
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware'
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'Performance_tracking_app.urls'
@@ -62,8 +62,7 @@ ROOT_URLCONF = 'Performance_tracking_app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -77,7 +76,14 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Performance_tracking_app.wsgi.application'
+ASGI_APPLICATION = 'Performance_tracking_app.asgi.application'  # Añadido para Django Channels
 
+# Configuración para Channels
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases

@@ -42,7 +42,7 @@ function App() {
       return [
         <Estudiantes id="Estudiantes" />,
         currentPage === 'SeguimientoSilabo' ? (
-          < SeguimientoSilabo id = "Seguimiento sílabo" handlePageChange ={ handlePageChange} />
+          < SeguimientoSilabo id="Seguimiento sílabo" handlePageChange={handlePageChange} showNotification={false} />
         ) : (
           < RegistroAvance id = "Seguimiento sílabo" handlePageChange ={ handlePageChange} />
         ),

@@ -21,7 +21,7 @@ Sección de la feature abordada en este componente:
     Alertas de tipo notificacion para avisar al docente el retraso del registro de su carga horaria en diferentes aspectos.
 */
 /**
- * Creado por: David Torres
+ * Creado por: David Torres y Gary Campaña
  */
 
 import React, { useState, useEffect, useImperativeHandle, forwardRef } from 'react';
@@ -45,7 +45,7 @@ const CargaHorariaAtrasada = forwardRef((_, ref) => {
     const [showModal, setShowModal] = useState(false);
     const [notificacionSeleccionada, setNotificacionSeleccionada] = useState<Notificacion | null>(null);
     const { setPaginaActual } = useContextoGlobal();
-    const id_docente = 3;
+    const id_docente = 1;
 
     // Exponer una función para recargar notificaciones a través de la referencia
     useImperativeHandle(ref, () => ({
@@ -58,12 +58,6 @@ const CargaHorariaAtrasada = forwardRef((_, ref) => {
             await fetchNotificaciones();
         };
         fetchInitialNotificaciones();
-
-        // Configurar un intervalo para obtener notificaciones cada 5 minutos
-        const timer = setInterval(fetchNotificaciones, 300000); // Cada 5 minutos
-
-        // Limpiar el intervalo cuando el componente se desmonte
-        return () => clearInterval(timer);
     }, [id_docente]);
 
     /**

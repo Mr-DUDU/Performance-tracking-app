@@ -1,6 +1,99 @@
+/*Grupo encargado: Grupo 5
+    - David Averos (Backend)
+    - Gary Campaña (Documentación)
+    - David Torres (Frontend)
+
+/**
+ * Creado por: David Torres y Gary Campaña
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+
+/* Animación de titilación */
+@keyframes titilar {
+  0% { opacity: 3; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* Estilo de la barra de navegación */
 .nav-bar {
   color: white;
   height: 10vh;
   background-color: #4d3f92;
   padding: 8px 5vw;
+  font-family: 'Montserrat', sans-serif; 
+}
+
+/* Notificaciones */
+.notificaciones {
+  position: relative;
+  display: inline-block;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.notification-icon {
+  position: absolute;
+  top: -5px;
+  right: 15px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 5px;
+  font-size: 10px;
+  width: 20px;  /* Tamaño del círculo */
+  height: 20px; /* Tamaño del círculo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: titilar 5s infinite;
+}
+
+/* Dropdown de notificaciones */
+.notifications-dropdown .dropdown-menu {
+  background-color: #715BDA;
+  border: none;
+  padding: 0; 
+  border-radius: 10px;
+}
+
+.notifications-dropdown .notification-item {
+  background-color: #715BDA;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 10px;
+  display: flex;             /* Asegura que el contenido esté alineado */
+  align-items: center;       /* Centra verticalmente el contenido */
+}
+
+.notifications-dropdown .notification-item:hover { 
+  background-color: #5d3cff;
+}
+
+.notifications-dropdown .notification-item2 {
+  background-color: #5d3cff;
+}
+
+/* Alineación de contenido dentro de la notificación */
+.notification-item .notification-content {
+  display: flex;
+  align-items: center;
+  width: 100%;                /* Ocupa todo el ancho disponible */
+}
+
+.notification-item .notification-icon2 {
+  margin-right: 10px;         /* Espacio entre el ícono y el texto */
+}
+
+.notification-item .notification-aspecto {
+  flex-grow: 1;               /* Ocupa el espacio restante */
+  margin: 0;
+  font-weight: bold;
+}
+
+.notification-item .notification-vermas {
+  margin-left: 30px;          /* Espacio entre el texto del aspecto y "ver más" */
+  color: #FFFFFF;             /* Asegura que el texto sea legible sobre el fondo */
+  
 }

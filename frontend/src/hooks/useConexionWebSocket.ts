@@ -63,10 +63,11 @@ export const useConexionWebSocket = (idDocente: number) => {
 
             // Verifica si hay notificaciones en el mensaje recibido.
             if (data.notificaciones) {
-                setNotifications(data.notificaciones);
+                const filteredNotifications = data.notificaciones.filter((n: { notificaciones_disponibles: any; }) => n.notificaciones_disponibles);
+                setNotifications(filteredNotifications);
                 // Calcula el número de notificaciones no leídas.
-                const unread = data.notificaciones.filter((n: { notificaciones_disponibles: any; }) => n.notificaciones_disponibles).length;
-                setUnreadCount(unread);
+        const unread = filteredNotifications.length;
+        setUnreadCount(unread);
             }
         };
 
